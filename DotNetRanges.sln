@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C079AEDB-BD68-4838-BABD-133AAC998D1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CD04A21B-4634-4158-8725-4679840C1BEA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetRanges", "src\DotNetRanges\DotNetRanges.csproj", "{819CA2C3-25AC-4462-B0F0-DE83267951EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetRanges.Tests", "test\DotNetRanges.Tests\DotNetRanges.Tests.csproj", "{8C436F83-4FA4-412E-B7AD-562ADAFF551D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{819CA2C3-25AC-4462-B0F0-DE83267951EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819CA2C3-25AC-4462-B0F0-DE83267951EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819CA2C3-25AC-4462-B0F0-DE83267951EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819CA2C3-25AC-4462-B0F0-DE83267951EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C436F83-4FA4-412E-B7AD-562ADAFF551D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C436F83-4FA4-412E-B7AD-562ADAFF551D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C436F83-4FA4-412E-B7AD-562ADAFF551D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C436F83-4FA4-412E-B7AD-562ADAFF551D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{819CA2C3-25AC-4462-B0F0-DE83267951EF} = {C079AEDB-BD68-4838-BABD-133AAC998D1D}
+		{8C436F83-4FA4-412E-B7AD-562ADAFF551D} = {CD04A21B-4634-4158-8725-4679840C1BEA}
+	EndGlobalSection
+EndGlobal
