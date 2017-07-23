@@ -55,6 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Experimental\ClosedRangeTests.cs" />
+    <Compile Include="Experimental\InfiniteRangeTests.cs" />
+    <Compile Include="Experimental\RangeStringRepresentationTests.cs" />
     <Compile Include="Experimental\RangeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
