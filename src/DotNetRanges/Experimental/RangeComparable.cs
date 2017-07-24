@@ -25,36 +25,6 @@ namespace DotNetRanges.Experimental
             return thisFlags.CompareTo(otherFlags);
         }
 
-        private int LowerFiniteBoundCompareTo(Range<T> other)
-        {
-            var otherLowerFlags = other._bitmask & RangeFlag.AllLowerBits;
-
-            if ((otherLowerFlags & RangeFlag.LowerInfiniteBound) != 0) return 1;
-            else if ((otherLowerFlags & RangeFlag.UpperInfiniteBound) != 0) return -1;
-
-            var result = _lowerBound.CompareTo(other._lowerBound);
-            if (result != 0) return result;
-
-            var thisLowerFlags = _bitmask & RangeFlag.AllLowerBits;
-
-            return thisLowerFlags.CompareTo(otherLowerFlags);
-        }
-
-        private int UpperFiniteBoundCompareTo(Range<T> other)
-        {
-            var otherUpperFlags = other._bitmask & RangeFlag.AllUpperBits;
-
-            if ((otherUpperFlags & RangeFlag.LowerInfiniteBound) != 0) return 1;
-            else if ((otherUpperFlags & RangeFlag.UpperInfiniteBound) != 0) return -1;
-
-            var result = _upperBound.CompareTo(other._upperBound);
-            if (result != 0) return result;
-
-            var thisUpperFlags = _bitmask & RangeFlag.AllUpperBits;
-
-            return thisUpperFlags.CompareTo(otherUpperFlags);
-        }
-
         public int LowerBoundCompareTo(Range<T> other)
         {
 #if DEBUG

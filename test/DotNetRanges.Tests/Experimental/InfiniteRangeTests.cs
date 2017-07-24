@@ -13,6 +13,7 @@ namespace DotNetRanges.Tests.Experimental
             var b = Range<int>.All();
 
             Assert.True(a.Equals(b));
+            Assert.True(b.Equals(a));
         }
 
         [Fact]

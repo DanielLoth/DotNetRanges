@@ -102,9 +102,14 @@ namespace DotNetRanges.Experimental
 
         #region IEquatable<T>
 
+        public static bool Equals(Range<T> left, Range<T> right)
+        {
+            return left.LowerBoundCompareTo(right) == 0 && left.UpperBoundCompareTo(right) == 0;
+        }
+
         public bool Equals(Range<T> other)
         {
-            return LowerBoundCompareTo(other) == 0 && UpperBoundCompareTo(other) == 0;
+            return Equals(this, other);
         }
 
         #endregion
