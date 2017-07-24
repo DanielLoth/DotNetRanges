@@ -16,6 +16,18 @@ namespace DotNetRanges.Experimental
             Debug.Assert(IsPowerOfTwo(upperBitmask));
         }
 
+        public static void AssertHasLowerBound(this RangeFlag flags)
+        {
+            var lowerBitmask = flags & RangeFlag.AllLowerBits;
+            Debug.Assert((flags & lowerBitmask) != 0);
+        }
+
+        public static void AssertHasUpperBound(this RangeFlag flags)
+        {
+            var upperBitmask = flags & RangeFlag.AllUpperBits;
+            Debug.Assert((flags & upperBitmask) != 0);
+        }
+
         private static bool IsPowerOfTwo(RangeFlag flags)
         {
             return flags > 0 && (flags & (flags - 1)) == 0;
@@ -31,7 +43,7 @@ namespace DotNetRanges.Experimental
 
             if (hasLowerBound)
             {
-                var closedLower = (flags & RangeFlag.LowerBelowValue) != 0;
+                var closedLower = (flags & RangeFlag.LowerClosedBound) != 0;
 
                 builder.Append(closedLower ? "[" : "(");
                 builder.Append(range.LowerBound);
@@ -45,7 +57,7 @@ namespace DotNetRanges.Experimental
 
             if (hasUpperBound)
             {
-                var closedUpper = (flags & RangeFlag.UpperAboveValue) != 0;
+                var closedUpper = (flags & RangeFlag.UpperClosedBound) != 0;
 
                 builder.Append(range.UpperBound);
                 builder.Append(closedUpper ? "]" : ")");

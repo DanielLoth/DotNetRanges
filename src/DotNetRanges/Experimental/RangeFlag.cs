@@ -5,18 +5,18 @@ namespace DotNetRanges.Experimental
     [Flags]
     enum RangeFlag : byte
     {
-        LowerBelowValue = 1,
-        LowerAboveValue = 2,
-        LowerBelowAll = 4,
+        LowerClosedBound = 1, /* LowerBelowValue in Guava */
+        LowerOpenBound = 2, /* LowerAboveValue in Guava */
+        LowerInfiniteBound = 4, /* LowerBelowAll in Guava */
 
-        UpperBelowValue = 8,
-        UpperAboveValue = 16,
-        UpperAboveAll = 32,
+        UpperOpenBound = 8, /* UpperBelowValue in Guava */
+        UpperClosedBound = 16, /* UpperAboveValue in Guava */
+        UpperInfiniteBound = 32, /* UpperAboveAll in Guava */
 
-        HasLowerBound = LowerBelowValue | LowerAboveValue,
-        HasUpperBound = UpperBelowValue | UpperAboveValue,
+        HasLowerBound = LowerClosedBound | LowerOpenBound,
+        HasUpperBound = UpperOpenBound | UpperClosedBound,
 
-        AllLowerBits = LowerBelowValue | LowerAboveValue | LowerBelowAll,
-        AllUpperBits = UpperBelowValue | UpperAboveValue | UpperAboveAll
+        AllLowerBits = LowerClosedBound | LowerOpenBound | LowerInfiniteBound,
+        AllUpperBits = UpperOpenBound | UpperClosedBound | UpperInfiniteBound
     }
 }

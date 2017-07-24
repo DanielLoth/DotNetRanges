@@ -15,8 +15,8 @@ namespace DotNetRanges.Experimental
         public bool HasLowerBound => (_bitmask & RangeFlag.HasLowerBound) != 0;
         public bool HasUpperBound => (_bitmask & RangeFlag.HasUpperBound) != 0;
 
-        bool HasInfiniteLowerBound => (_bitmask & RangeFlag.LowerBelowAll) != 0;
-        bool HasInfiniteUpperBound => (_bitmask & RangeFlag.UpperAboveAll) != 0;
+        bool HasInfiniteLowerBound => (_bitmask & RangeFlag.LowerInfiniteBound) != 0;
+        bool HasInfiniteUpperBound => (_bitmask & RangeFlag.UpperInfiniteBound) != 0;
 
         #region Constructors
 
@@ -37,63 +37,63 @@ namespace DotNetRanges.Experimental
 
         public static Range<T> Open(T lower, T upper)
         {
-            var flags = RangeFlag.LowerAboveValue | RangeFlag.UpperBelowValue;
+            var flags = RangeFlag.LowerOpenBound | RangeFlag.UpperOpenBound;
 
             return new Range<T>(lower, upper, flags);
         }
 
         public static Range<T> Closed(T lower, T upper)
         {
-            var flags = RangeFlag.LowerBelowValue | RangeFlag.UpperAboveValue;
+            var flags = RangeFlag.LowerClosedBound | RangeFlag.UpperClosedBound;
 
             return new Range<T>(lower, upper, flags);
         }
 
         public static Range<T> ClosedOpen(T lower, T upper)
         {
-            var flags = RangeFlag.LowerBelowValue | RangeFlag.UpperBelowValue;
+            var flags = RangeFlag.LowerClosedBound | RangeFlag.UpperOpenBound;
 
             return new Range<T>(lower, upper, flags);
         }
 
         public static Range<T> OpenClosed(T lower, T upper)
         {
-            var flags = RangeFlag.LowerAboveValue | RangeFlag.UpperAboveValue;
+            var flags = RangeFlag.LowerOpenBound | RangeFlag.UpperClosedBound;
 
             return new Range<T>(lower, upper, flags);
         }
 
         public static Range<T> GreaterThan(T lower)
         {
-            var flags = RangeFlag.LowerAboveValue | RangeFlag.UpperAboveAll;
+            var flags = RangeFlag.LowerOpenBound | RangeFlag.UpperInfiniteBound;
 
             return new Range<T>(lower, default(T), flags);
         }
 
         public static Range<T> AtLeast(T lower)
         {
-            var flags = RangeFlag.LowerBelowValue | RangeFlag.UpperAboveAll;
+            var flags = RangeFlag.LowerClosedBound | RangeFlag.UpperInfiniteBound;
 
             return new Range<T>(lower, default(T), flags);
         }
 
         public static Range<T> LessThan(T upper)
         {
-            var flags = RangeFlag.LowerBelowAll | RangeFlag.UpperBelowValue;
+            var flags = RangeFlag.LowerInfiniteBound | RangeFlag.UpperOpenBound;
 
             return new Range<T>(default(T), upper, flags);
         }
 
         public static Range<T> AtMost(T upper)
         {
-            var flags = RangeFlag.LowerBelowAll | RangeFlag.UpperAboveValue;
+            var flags = RangeFlag.LowerInfiniteBound | RangeFlag.UpperClosedBound;
 
             return new Range<T>(default(T), upper, flags);
         }
 
         public static Range<T> All()
         {
-            var flags = RangeFlag.LowerBelowAll | RangeFlag.UpperAboveAll;
+            var flags = RangeFlag.LowerInfiniteBound | RangeFlag.UpperInfiniteBound;
 
             return new Range<T>(default(T), default(T), flags);
         }
