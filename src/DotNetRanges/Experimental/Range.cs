@@ -86,6 +86,9 @@ namespace DotNetRanges.Experimental
 
         public static bool Equals(Range<T> left, Range<T> right)
         {
+            if (left == null || right == null) return false;
+            if (ReferenceEquals(left, right)) return true;
+
             return left._lowerBound.CompareTo(right._lowerBound) == 0 &&
                 left._upperBound.CompareTo(right._upperBound) == 0;
         }

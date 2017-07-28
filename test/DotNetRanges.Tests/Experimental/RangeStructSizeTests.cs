@@ -5,7 +5,7 @@ using Xunit;
 
 namespace DotNetRanges.Tests.Experimental
 {
-    public class RangeTests
+    public class RangeStructSizeTests
     {
 #pragma warning disable 0169 // Suppress warning about non-use. This struct exists to facilitate struct size test.
         struct IntRangeStruct
