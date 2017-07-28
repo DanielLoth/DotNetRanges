@@ -15,9 +15,6 @@ namespace DotNetRanges.Experimental
         public bool HasLowerEndpoint => _lowerBound.HasEndpoint;
         public bool HasUpperEndpoint => _upperBound.HasEndpoint;
 
-        bool HasInfiniteLowerEndpoint => !_lowerBound.HasEndpoint;
-        bool HasInfiniteUpperEndpoint => !_upperBound.HasEndpoint;
-
         #region Constructors
 
         private Range(ICut<T> lowerBound, ICut<T> upperBound)
