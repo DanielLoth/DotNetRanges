@@ -98,8 +98,8 @@ namespace DotNetRanges.Experimental
         internal static readonly AboveAll<T> INSTANCE = new AboveAll<T>();
 
         public override BoundType TypeAsLowerBound => throw new InvalidOperationException();
-        public override BoundType TypeAsUpperBound => throw new InvalidOperationException();
-        public override T Endpoint => throw new InvalidOperationException();
+        public override BoundType TypeAsUpperBound => BoundType.UNBOUNDED;
+        public override T Endpoint => throw new InvalidOperationException("Unbounded - no upper bound");
         public override bool HasEndpoint => false;
 
         private AboveAll()
@@ -180,9 +180,9 @@ namespace DotNetRanges.Experimental
     {
         internal static readonly BelowAll<T> INSTANCE = new BelowAll<T>();
 
-        public override BoundType TypeAsLowerBound => throw new InvalidOperationException();
+        public override BoundType TypeAsLowerBound => BoundType.UNBOUNDED;
         public override BoundType TypeAsUpperBound => throw new InvalidOperationException();
-        public override T Endpoint => throw new InvalidOperationException();
+        public override T Endpoint => throw new InvalidOperationException("Unbounded - no lower bound");
         public override bool HasEndpoint => false;
 
         private BelowAll()

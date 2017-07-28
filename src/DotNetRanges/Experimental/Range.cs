@@ -9,8 +9,11 @@ namespace DotNetRanges.Experimental
         private ICut<T> _lowerBound;
         private ICut<T> _upperBound;
 
-        public T LowerEndpoint => HasLowerEndpoint ? _lowerBound.Endpoint : throw new InvalidOperationException("Unbounded - no lower bound");
-        public T UpperEndpoint => HasUpperEndpoint ? _upperBound.Endpoint : throw new InvalidOperationException("Unbounded - no upper bound");
+        public BoundType LowerBoundType => _lowerBound.TypeAsLowerBound;
+        public BoundType UpperBoundType => _upperBound.TypeAsUpperBound;
+
+        public T LowerEndpoint => _lowerBound.Endpoint;
+        public T UpperEndpoint => _upperBound.Endpoint;
 
         public bool HasLowerEndpoint => _lowerBound.HasEndpoint;
         public bool HasUpperEndpoint => _upperBound.HasEndpoint;
