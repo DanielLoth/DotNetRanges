@@ -1,83 +1,83 @@
 ﻿using System;
+using System.Text;
 
 namespace DotNetRanges.Experimental
 {
-    public partial struct Range<T> : IEquatable<Range<T>>
+    public class Range<T> : IEquatable<Range<T>>
         where T : IComparable<T>
     {
-        private readonly T _lowerEndpoint;
-        private readonly T _upperEndpoint;
-        private readonly RangeFlag _bitmask;
+        private ICut<T> _lowerBound;
+        private ICut<T> _upperBound;
 
-        public T LowerEndpoint => HasLowerEndpoint ? _lowerEndpoint : throw new InvalidOperationException("Unbounded - no lower bound");
-        public T UpperEndpoint => HasUpperEndpoint ? _upperEndpoint : throw new InvalidOperationException("Unbounded - no upper bound");
+        public T LowerEndpoint => HasLowerEndpoint ? _lowerBound.Endpoint : throw new InvalidOperationException("Unbounded - no lower bound");
+        public T UpperEndpoint => HasUpperEndpoint ? _upperBound.Endpoint : throw new InvalidOperationException("Unbounded - no upper bound");
 
-        public bool HasLowerEndpoint => (_bitmask & RangeFlag.HasLowerBound) != 0;
-        public bool HasUpperEndpoint => (_bitmask & RangeFlag.HasUpperBound) != 0;
+        public bool HasLowerEndpoint => _lowerBound.HasEndpoint;
+        public bool HasUpperEndpoint => _upperBound.HasEndpoint;
 
-        bool HasInfiniteLowerEndpoint => (_bitmask & RangeFlag.LowerInfiniteBound) != 0;
-        bool HasInfiniteUpperEndpoint => (_bitmask & RangeFlag.UpperInfiniteBound) != 0;
+        bool HasInfiniteLowerEndpoint => !_lowerBound.HasEndpoint;
+        bool HasInfiniteUpperEndpoint => !_upperBound.HasEndpoint;
 
         #region Constructors
 
-        private Range(T lowerEndpoint, T upperEndpoint, RangeFlag bitmask)
+        private Range(ICut<T> lowerBound, ICut<T> upperBound)
         {
-#if DEBUG
-            bitmask.AssertMutualExclusion();
-#endif
-
-            _lowerEndpoint = lowerEndpoint;
-            _upperEndpoint = upperEndpoint;
-            _bitmask = bitmask;
+            _lowerBound = lowerBound ?? throw new ArgumentNullException(nameof(lowerBound));
+            _upperBound = upperBound ?? throw new ArgumentNullException(nameof(upperBound));
         }
 
         #endregion
 
         #region Factory methods
 
+        internal static Range<T> Create(ICut<T> lowerBound, ICut<T> upperBound)
+        {
+            return new Range<T>(lowerBound, upperBound);
+        }
+
         public static Range<T> Open(T lower, T upper)
         {
-            return new Range<T>(lower, upper, RangeFlag.Open);
+            return Create(Cut<T>.LowerOpenBound(lower), Cut<T>.UpperOpenBound(upper));
         }
 
         public static Range<T> Closed(T lower, T upper)
         {
-            return new Range<T>(lower, upper, RangeFlag.Closed);
+            return Create(Cut<T>.LowerClosedBound(lower), Cut<T>.UpperClosedBound(upper));
         }
 
         public static Range<T> ClosedOpen(T lower, T upper)
         {
-            return new Range<T>(lower, upper, RangeFlag.ClosedOpen);
+            return Create(Cut<T>.LowerClosedBound(lower), Cut<T>.UpperOpenBound(upper));
         }
 
         public static Range<T> OpenClosed(T lower, T upper)
         {
-            return new Range<T>(lower, upper, RangeFlag.OpenClosed);
+            return Create(Cut<T>.LowerOpenBound(lower), Cut<T>.UpperClosedBound(upper));
         }
 
         public static Range<T> GreaterThan(T lower)
         {
-            return new Range<T>(lower, default(T), RangeFlag.GreaterThan);
+            return Create(Cut<T>.LowerOpenBound(lower), Cut<T>.AboveAll());
         }
 
         public static Range<T> AtLeast(T lower)
         {
-            return new Range<T>(lower, default(T), RangeFlag.AtLeast);
+            return Create(Cut<T>.LowerClosedBound(lower), Cut<T>.AboveAll());
         }
 
         public static Range<T> LessThan(T upper)
         {
-            return new Range<T>(default(T), upper, RangeFlag.LessThan);
+            return Create(Cut<T>.BelowAll(), Cut<T>.UpperOpenBound(upper));
         }
 
         public static Range<T> AtMost(T upper)
         {
-            return new Range<T>(default(T), upper, RangeFlag.AtMost);
+            return Create(Cut<T>.BelowAll(), Cut<T>.UpperClosedBound(upper));
         }
 
         public static Range<T> All()
         {
-            return new Range<T>(default(T), default(T), RangeFlag.All);
+            return Create(Cut<T>.BelowAll(), Cut<T>.AboveAll());
         }
 
         #endregion
@@ -86,7 +86,8 @@ namespace DotNetRanges.Experimental
 
         public static bool Equals(Range<T> left, Range<T> right)
         {
-            return left.LowerBoundCompareTo(right) == 0 && left.UpperBoundCompareTo(right) == 0;
+            return left._lowerBound.CompareTo(right._lowerBound) == 0 &&
+                left._upperBound.CompareTo(right._upperBound) == 0;
         }
 
         public bool Equals(Range<T> other)
@@ -113,12 +114,19 @@ namespace DotNetRanges.Experimental
 
         public override int GetHashCode()
         {
+            // TODO: Write this in terms of the upper and lower bounds.
             return base.GetHashCode();
         }
 
         public override string ToString()
         {
-            return _bitmask.RangeToString(this);
+            var builder = new StringBuilder(32);
+
+            _lowerBound.DescribeAsLowerBound(builder);
+            builder.Append("..");
+            _upperBound.DescribeAsUpperBound(builder);
+
+            return builder.ToString();
         }
 
         #endregion

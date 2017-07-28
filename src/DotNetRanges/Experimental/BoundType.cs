@@ -1,8 +1,8 @@
 ﻿namespace DotNetRanges.Experimental
 {
-    public enum BoundType
+    public enum BoundType : byte
     {
-        OPEN,
-        CLOSED
+        OPEN = 1,
+        CLOSED = 2
     }
 }

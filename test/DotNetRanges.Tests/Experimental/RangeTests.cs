@@ -26,15 +26,6 @@ namespace DotNetRanges.Tests.Experimental
 #pragma warning restore 0169
 
         [Fact]
-        public void FirstUnitTest()
-        {
-            var range = new Range<int>();
-
-            Assert.NotNull(range);
-            Assert.Equal(1, 1);
-        }
-
-        [Fact]
         public void CheckStructSize()
         {
             var range = Range<int>.Closed(5, 10);
