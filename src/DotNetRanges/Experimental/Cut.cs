@@ -102,6 +102,11 @@ namespace DotNetRanges.Experimental
         public override T Endpoint => throw new InvalidOperationException();
         public override bool HasEndpoint => false;
 
+        private AboveAll()
+        {
+            // Private default constructor to enforce singleton usage.
+        }
+
         public override int CompareTo(ICut<T> other)
         {
             return other == this ? 0 : 1;
@@ -179,6 +184,11 @@ namespace DotNetRanges.Experimental
         public override BoundType TypeAsUpperBound => throw new InvalidOperationException();
         public override T Endpoint => throw new InvalidOperationException();
         public override bool HasEndpoint => false;
+
+        private BelowAll()
+        {
+            // Private default constructor to enforce singleton usage.
+        }
 
         public override int CompareTo(ICut<T> other)
         {
