@@ -38,4 +38,6 @@
 @REM ****************************************************************************************************
 @REM msbuild DotNetRanges.sln /t:Clean /p:Configuration=Release
 
-msbuild DotNetRanges.sln /t:Rebuild /p:Configuration=Release
+IF "%BuildConfiguration%"=="" (set BuildConfiguration="Release")
+
+msbuild DotNetRanges.sln /t:Rebuild /p:Configuration=%BuildConfiguration%
