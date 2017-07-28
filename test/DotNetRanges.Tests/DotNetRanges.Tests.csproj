@@ -59,7 +59,6 @@
     <Compile Include="Experimental\InfiniteRangeTests.cs" />
     <Compile Include="Experimental\RangeEqualityTests.cs" />
     <Compile Include="Experimental\RangeStringRepresentationTests.cs" />
-    <Compile Include="Experimental\RangeStructSizeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
