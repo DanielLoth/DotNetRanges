@@ -7,19 +7,23 @@ namespace DotNetRanges.Tests.Experimental
 {
     public class RangeTests
     {
+#pragma warning disable 0169 // Suppress warning about non-use. This struct exists to facilitate struct size test.
         struct IntRangeStruct
         {
             int upper;
             int lower;
             byte flags;
         }
+#pragma warning restore 0169
 
+#pragma warning disable 0169 // Suppress warning about non-use. This struct exists to facilitate struct size test.
         struct LongRangeStruct
         {
             long upper;
             long lower;
             byte flags;
         }
+#pragma warning restore 0169
 
         [Fact]
         public void FirstUnitTest()

@@ -34,6 +34,36 @@ namespace DotNetRanges.Experimental
         }
 #endif
 
+        public static bool InfiniteLowerBound(this RangeFlag flags)
+        {
+            return (flags & RangeFlag.LowerInfiniteBound) != 0;
+        }
+
+        public static bool InfiniteUpperBound(this RangeFlag flags)
+        {
+            return (flags & RangeFlag.UpperInfiniteBound) != 0;
+        }
+
+        public static bool LowerClosed(this RangeFlag flags)
+        {
+            return (flags & RangeFlag.LowerClosedBound) != 0;
+        }
+
+        public static bool LowerOpen(this RangeFlag flags)
+        {
+            return (flags & RangeFlag.LowerOpenBound) != 0;
+        }
+
+        public static bool UpperClosed(this RangeFlag flags)
+        {
+            return (flags & RangeFlag.UpperClosedBound) != 0;
+        }
+
+        public static bool UpperOpen(this RangeFlag flags)
+        {
+            return (flags & RangeFlag.UpperOpenBound) != 0;
+        }
+
         public static string RangeToString<T>(this RangeFlag flags, Range<T> range)
             where T : IComparable<T>
         {
@@ -46,7 +76,7 @@ namespace DotNetRanges.Experimental
                 var closedLower = (flags & RangeFlag.LowerClosedBound) != 0;
 
                 builder.Append(closedLower ? "[" : "(");
-                builder.Append(range.LowerBound);
+                builder.Append(range.LowerEndpoint);
             }
             else
             {
@@ -59,7 +89,7 @@ namespace DotNetRanges.Experimental
             {
                 var closedUpper = (flags & RangeFlag.UpperClosedBound) != 0;
 
-                builder.Append(range.UpperBound);
+                builder.Append(range.UpperEndpoint);
                 builder.Append(closedUpper ? "]" : ")");
             }
             else

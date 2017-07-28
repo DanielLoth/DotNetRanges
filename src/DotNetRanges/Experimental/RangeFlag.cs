@@ -17,6 +17,17 @@ namespace DotNetRanges.Experimental
         HasUpperBound = UpperOpenBound | UpperClosedBound,
 
         AllLowerBits = LowerClosedBound | LowerOpenBound | LowerInfiniteBound,
-        AllUpperBits = UpperOpenBound | UpperClosedBound | UpperInfiniteBound
+        AllUpperBits = UpperOpenBound | UpperClosedBound | UpperInfiniteBound,
+
+        /* Ranges */
+        Open = LowerOpenBound | UpperOpenBound,
+        Closed = LowerClosedBound | UpperClosedBound,
+        ClosedOpen = LowerClosedBound | UpperOpenBound,
+        OpenClosed = LowerOpenBound | UpperClosedBound,
+        GreaterThan = LowerOpenBound | UpperInfiniteBound,
+        AtLeast = LowerClosedBound | UpperInfiniteBound,
+        LessThan = LowerInfiniteBound | UpperOpenBound,
+        AtMost = LowerInfiniteBound | UpperClosedBound,
+        All = LowerInfiniteBound | UpperInfiniteBound
     }
 }

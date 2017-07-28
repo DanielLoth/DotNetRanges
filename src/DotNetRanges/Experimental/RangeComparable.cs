@@ -36,7 +36,7 @@ namespace DotNetRanges.Experimental
             var otherFlags = other._bitmask & RangeFlag.AllLowerBits;
 
             if ((thisFlags & RangeFlag.LowerInfiniteBound) != 0) return LowerInfiniteBoundCompareTo(other);
-            else return FiniteBoundCompareTo(thisFlags, otherFlags, _lowerBound, other._lowerBound);
+            else return FiniteBoundCompareTo(thisFlags, otherFlags, _lowerEndpoint, other._lowerEndpoint);
         }
 
         public int UpperBoundCompareTo(Range<T> other)
@@ -50,7 +50,7 @@ namespace DotNetRanges.Experimental
             var otherFlags = other._bitmask & RangeFlag.AllUpperBits;
 
             if ((thisFlags & RangeFlag.UpperInfiniteBound) != 0) return UpperInfiniteBoundCompareTo(other);
-            else return FiniteBoundCompareTo(thisFlags, otherFlags, _upperBound, other._upperBound);
+            else return FiniteBoundCompareTo(thisFlags, otherFlags, _upperEndpoint, other._upperEndpoint);
         }
     }
 }

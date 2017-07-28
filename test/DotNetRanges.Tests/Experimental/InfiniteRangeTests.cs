@@ -21,7 +21,7 @@ namespace DotNetRanges.Tests.Experimental
         {
             var infinite = Range<int>.All();
 
-            Assert.Throws<InvalidOperationException>(() => infinite.LowerBound);
+            Assert.Throws<InvalidOperationException>(() => infinite.LowerEndpoint);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace DotNetRanges.Tests.Experimental
         {
             var infinite = Range<int>.All();
 
-            Assert.Throws<InvalidOperationException>(() => infinite.UpperBound);
+            Assert.Throws<InvalidOperationException>(() => infinite.UpperEndpoint);
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace DotNetRanges.Tests.Experimental
         {
             var infinite = Range<int>.All();
 
-            Assert.False(infinite.HasLowerBound);
+            Assert.False(infinite.HasLowerEndpoint);
         }
 
         [Fact]
@@ -45,7 +45,7 @@ namespace DotNetRanges.Tests.Experimental
         {
             var infinite = Range<int>.All();
 
-            Assert.False(infinite.HasUpperBound);
+            Assert.False(infinite.HasUpperEndpoint);
         }
     }
 }

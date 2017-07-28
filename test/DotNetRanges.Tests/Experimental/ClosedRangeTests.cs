@@ -28,8 +28,8 @@ namespace DotNetRanges.Tests.Experimental
         [Fact]
         public void ClosedRangeEqualsEquivalentOpenRange()
         {
-            var closed = Range<int>.Closed(10, 20);
-            var open = Range<int>.Open(9, 21);
+            var closed = Range<int>.Closed(10, 20); // 10 to 20
+            var open = Range<int>.Open(9, 21); // 9.001 to 20.999
 
             Assert.True(closed.Equals(open));
             Assert.True(open.Equals(closed));
