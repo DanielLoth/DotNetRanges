@@ -55,7 +55,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Experimental\PrecedesTests.cs" />
+    <Compile Include="Experimental\Helper.cs" />
+    <Compile Include="Experimental\IntegerPrecedesTests.cs" />
+    <Compile Include="Experimental\LongPrecedesTests.cs" />
     <Compile Include="Experimental\ClosedRangeTests.cs" />
     <Compile Include="Experimental\InfiniteRangeTests.cs" />
     <Compile Include="Experimental\RangeBoundTypeTests.cs" />
