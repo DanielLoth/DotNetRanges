@@ -9,6 +9,9 @@ namespace DotNetRanges.Experimental
         private ICut<T> _lowerBound;
         private ICut<T> _upperBound;
 
+        internal ICut<T> LowerBound => _lowerBound;
+        internal ICut<T> UpperBound => _upperBound;
+
         public BoundType LowerBoundType => _lowerBound.TypeAsLowerBound;
         public BoundType UpperBoundType => _upperBound.TypeAsUpperBound;
 
@@ -22,6 +25,16 @@ namespace DotNetRanges.Experimental
 
         private Range(ICut<T> lowerBound, ICut<T> upperBound)
         {
+            if (lowerBound == null) throw new ArgumentNullException(nameof(lowerBound));
+            if (upperBound == null) throw new ArgumentNullException(nameof(upperBound));
+
+            if (lowerBound.CompareTo(upperBound) > 0 ||
+                lowerBound == AboveAll<T>.INSTANCE ||
+                upperBound == BelowAll<T>.INSTANCE)
+            {
+                throw new InvalidOperationException("Invalid range: " + ToString(lowerBound, upperBound));
+            }
+
             _lowerBound = lowerBound ?? throw new ArgumentNullException(nameof(lowerBound));
             _upperBound = upperBound ?? throw new ArgumentNullException(nameof(upperBound));
         }
@@ -121,15 +134,20 @@ namespace DotNetRanges.Experimental
             return base.GetHashCode();
         }
 
-        public override string ToString()
+        private static string ToString(ICut<T> lowerBound, ICut<T> upperBound)
         {
             var builder = new StringBuilder(32);
 
-            _lowerBound.DescribeAsLowerBound(builder);
+            lowerBound.DescribeAsLowerBound(builder);
             builder.Append("..");
-            _upperBound.DescribeAsUpperBound(builder);
+            upperBound.DescribeAsUpperBound(builder);
 
             return builder.ToString();
+        }
+
+        public override string ToString()
+        {
+            return ToString(_lowerBound, _upperBound);
         }
 
         #endregion
